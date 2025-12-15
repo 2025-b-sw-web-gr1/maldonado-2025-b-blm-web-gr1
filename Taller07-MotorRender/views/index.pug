@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  .hero
+    h2 Colección 2025 — Diseño y materiales premium
+    p.lead Descubre nuestra línea de muebles de cocina diseñados para durar y emocionar.
+  section#coleccion.products
+    h3 Nuestra colección
+    include _card.pug
+    .grid
+      each p in products
+        +card(p)
+  section#contacto.contact
+    h3 Contacto
+    p Si te interesa una solución a medida rellena el formulario:
+    form(method="post" action="/contact")
+      label(for="name") Nombre
+      input#name(type="text" name="name" required aria-required="true")
+      label(for="email") Email
+      input#email(type="email" name="email" required aria-required="true")
+      label(for="message") Mensaje
+      textarea#message(name="message" rows="4")
+      button(type="submit") Enviar

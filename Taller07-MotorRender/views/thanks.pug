@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  .thanks
+    h2 Gracias, #{name}!
+    p Hemos recibido tu mensaje:
+    blockquote= message
+    p Nos pondremos en contacto con: #{email}
+    a(href="/") Volver al inicio

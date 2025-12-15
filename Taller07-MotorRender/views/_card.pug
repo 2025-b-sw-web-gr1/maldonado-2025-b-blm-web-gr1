@@ -1,0 +1,8 @@
+mixin card(product)
+  article.card
+    img(src=product.img alt=product.name)
+    .card-body
+      h4= product.name
+      p.desc= product.desc
+      p.price= product.price
+      a.cta(href=`/product/${product.id}`) Ver detalle

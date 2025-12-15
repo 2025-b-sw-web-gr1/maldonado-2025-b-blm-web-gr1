@@ -1,0 +1,23 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title #{title}
+    link(rel="stylesheet" href="/css/style.css")
+  body
+    a.skip(href="#main") Saltar al contenido
+    header.site-header
+      .container
+        h1.brand Cocinas Atelier — Lujo funcional
+        nav
+          a(href="/") Inicio
+          a(href="/#coleccion") Colección
+          a(href="/#contacto") Contacto
+    main#main.container
+      block content
+    footer.site-footer
+      .container
+        small © 2025 Cocinas Atelier
+    //- Scripts de la demo
+    block scripts

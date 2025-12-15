@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Estándares W3C - Documento</title>
+  <style>
+    @page {
+      size: letter;
+      margin: 2.54cm;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Calibri', 'Arial', sans-serif;
+      font-size: 12pt;
+      line-height: 1.5;
+      color: #000;
+      background: #f5f5f5;
+      padding: 2rem;
+    }
+
+    .document {
+      max-width: 21.59cm;
+      margin: 0 auto;
+      background: white;
+      padding: 2.54cm;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      min-height: 27.94cm;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 3px solid #2c3e50;
+    }
+
+    .header h1 {
+      font-size: 18pt;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: #2c3e50;
+    }
+
+    .header .subtitle {
+      font-size: 14pt;
+      margin-bottom: 1rem;
+      color: #555;
+    }
+
+    .header .metadata {
+      font-size: 11pt;
+      line-height: 1.8;
+      color: #666;
+    }
+
+    h2 {
+      font-size: 14pt;
+      font-weight: bold;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: #2c3e50;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 0.3rem;
+    }
+
+    p {
+      text-align: justify;
+      margin-bottom: 1rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 11pt;
+    }
+
+    th {
+      background: #2c3e50;
+      color: white;
+      padding: 0.8rem;
+      text-align: left;
+      font-weight: bold;
+      border: 1px solid #2c3e50;
+    }
+
+    td {
+      padding: 0.8rem;
+      border: 1px solid #bbb;
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    .standard-name {
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    .btn-download {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #2c3e50;
+      color: white;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: all 0.3s;
+      font-family: 'Calibri', 'Arial', sans-serif;
+    }
+
+    .btn-download:hover {
+      background: #34495e;
+      transform: translateY(-2px);
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .document {
+        box-shadow: none;
+        padding: 0;
+      }
+
+      .btn-download {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="btn-download" onclick="window.print()">📄 Imprimir como Word/PDF</button>
+
+  <div class="document">
+    <div class="header">
+      <h1>Estándares W3C para el Desarrollo Web</h1>
+      <div class="subtitle">Análisis de Estándares Fundamentales</div>
+      <div class="metadata">
+        <strong>Estudiante:</strong> Leonardo Maldonado<br>
+        <strong>Institución:</strong> Escuela Politecnica Nacional<br>
+        <strong>Fecha:</strong> Diciembre 2025<br>
+        <strong>Asignatura:</strong> Aplicaciones Web
+      </div>
+    </div>
+
+    <h2>Objetivo</h2>
+    <p>
+      Analizar y documentar cinco estándares fundamentales del W3C (World Wide Web Consortium) que son esenciales en el desarrollo web moderno, describiendo sus características principales, funciones y la justificación de su selección, con el fin de comprender su importancia en la creación de aplicaciones web robustas, accesibles y compatibles con los estándares internacionales.
+    </p>
+
+    <h2>Tabla de Estándares W3C Seleccionados</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 12%">Estándar</th>
+          <th style="width: 18%">Nombre Completo</th>
+          <th style="width: 35%">Descripción y Función</th>
+          <th style="width: 35%">Justificación</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="standard-name">HTML5</span></td>
+          <td>HyperText Markup Language 5</td>
+          <td>
+            Lenguaje de marcado estándar para crear y estructurar contenido web. Proporciona elementos semánticos (header, nav, article, section, footer), soporte multimedia nativo (audio, video), APIs para gráficos (canvas), formularios mejorados con validación integrada, y nuevas capacidades para aplicaciones web.
+          </td>
+          <td>
+            Seleccioné HTML5 porque es la base fundamental de toda página web. Su estructura semántica permite crear contenido mejor organizado y accesible, facilita el posicionamiento SEO, y sus nuevas características eliminan la dependencia de plugins externos para multimedia. Es el primer estándar que todo desarrollador web debe dominar.
+          </td>
+        </tr>
+        <tr>
+          <td><span class="standard-name">CSS3</span></td>
+          <td>Cascading Style Sheets Level 3</td>
+          <td>
+            Lenguaje de hojas de estilo que controla la presentación visual de documentos HTML. Incluye módulos para animaciones, transiciones, transformaciones 2D/3D, layouts avanzados (Flexbox y Grid), variables CSS, media queries para diseño responsive, y efectos visuales como sombras, gradientes y filtros.
+          </td>
+          <td>
+            CSS3 es fundamental porque permite crear interfaces modernas y atractivas sin necesidad de imágenes o JavaScript adicional. Sus sistemas de layout (Flexbox y Grid) revolucionaron el diseño responsive, y sus capacidades de animación mejoran significativamente la experiencia del usuario. Es indispensable para cualquier proyecto web actual.
+          </td>
+        </tr>
+        <tr>
+          <td><span class="standard-name">WCAG 2.1</span></td>
+          <td>Web Content Accessibility Guidelines 2.1</td>
+          <td>
+            Directrices internacionales para hacer el contenido web accesible a personas con discapacidades (visuales, auditivas, motoras, cognitivas). Establece cuatro principios fundamentales: contenido Perceptible, interfaz Operable, información Comprensible y código Robusto. Define tres niveles de conformidad: A (básico), AA (estándar) y AAA (avanzado).
+          </td>
+          <td>
+            Incluí WCAG 2.1 porque la accesibilidad es un aspecto ético y legal del desarrollo web. Garantiza que las aplicaciones sean utilizables por todos los usuarios, independientemente de sus capacidades. Además, las prácticas de accesibilidad mejoran la usabilidad general, el SEO y el alcance de la audiencia del sitio web.
+          </td>
+        </tr>
+        <tr>
+          <td><span class="standard-name">ECMAScript</span></td>
+          <td>ECMAScript 2015+ (ES6+)</td>
+          <td>
+            Especificación estándar del lenguaje JavaScript. Las versiones modernas (ES6 en adelante) incluyen características como arrow functions, clases, módulos, destructuring, template literals, promesas, async/await, operadores spread/rest, y nuevos métodos para trabajar con arrays, objetos y strings de manera más eficiente y legible.
+          </td>
+          <td>
+            ECMAScript es esencial porque JavaScript es el lenguaje de programación de la web. Las características modernas de ES6+ hacen el código más limpio, mantenible y eficiente. Permite crear aplicaciones web interactivas y dinámicas, y es la base de frameworks y librerías populares como React, Vue y Angular.
+          </td>
+        </tr>
+        <tr>
+          <td><span class="standard-name">Web APIs</span></td>
+          <td>Web Application Programming Interfaces</td>
+          <td>
+            Conjunto de interfaces estandarizadas que permiten acceder a funcionalidades del navegador y del dispositivo. Incluye: Fetch API (peticiones HTTP), Geolocation API (ubicación GPS), Web Storage (almacenamiento local), Service Workers (funcionalidad offline), WebSockets (comunicación en tiempo real), Web Workers (procesamiento en segundo plano), entre otras.
+          </td>
+          <td>
+            Las Web APIs son cruciales porque extienden las capacidades de las aplicaciones web más allá del contenido estático. Permiten crear Progressive Web Apps (PWAs) con experiencias similares a aplicaciones nativas, incluyendo funcionalidad offline, notificaciones push y acceso a hardware del dispositivo, lo cual es el futuro del desarrollo web.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Justificación General de la Selección</h2>
+    <p>
+      Elegí estos cinco estándares porque representan las áreas fundamentales del desarrollo web moderno y cubren tanto aspectos técnicos como éticos de la profesión. HTML5 y CSS3 son los pilares básicos de estructura y presentación que todo desarrollador debe dominar. WCAG 2.1 representa el compromiso con la inclusión digital y la accesibilidad universal, aspectos que considero fundamentales en cualquier proyecto web responsable.
+    </p>
+    <p>
+      ECMAScript fue seleccionado porque JavaScript es el lenguaje que da vida e interactividad a las páginas web, y conocer sus estándares modernos es crucial para escribir código de calidad. Finalmente, las Web APIs representan el presente y futuro del desarrollo web, permitiendo crear aplicaciones cada vez más potentes y versátiles que compiten con las aplicaciones nativas.
+    </p>
+    <p>
+      Esta combinación de estándares proporciona una base sólida y completa para el desarrollo web profesional, abarcando desde lo fundamental hasta las capacidades más avanzadas, y asegurando que las aplicaciones creadas sean accesibles, mantenibles y estén alineadas con las mejores prácticas de la industria.
+    </p>
+
+    <h2>Conclusión</h2>
+    <p>
+      Los cinco estándares seleccionados representan los pilares técnicos y éticos del desarrollo web profesional contemporáneo. HTML5 y CSS3 proporcionan la estructura y presentación; WCAG asegura la inclusión; ECMAScript potencia la interactividad; y las Web APIs extienden las capacidades hacia experiencias de aplicación completas.
+    </p>
+  </div>
+
+  <script>
+    // Mensaje en consola
+    console.log('Documento de estándares W3C cargado correctamente');
+  </script>
+</body>
+</html>

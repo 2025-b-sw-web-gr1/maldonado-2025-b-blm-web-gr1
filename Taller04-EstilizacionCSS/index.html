@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Estilización en la Web — Formas de cargar estilos</title>
+  <meta name="description" content="Ejemplos educativos de diferentes formas de cargar CSS en una página: inline, internal, external, @import, preload y dinámico con JS.">
+  <style>
+    :root{
+      --primary-red:#D72631; --accent-yellow:#FFC300; --warm-orange:#FF9F1C; --neutral-dark:#1B1B1B; --muted-bg:#FFF9F2;
+      --card-bg: #FFFFFF;
+    }
+    *{box-sizing:border-box}
+    body{font-family:Segoe UI, Tahoma, sans-serif;background:linear-gradient(135deg,var(--muted-bg),#fff);color:var(--neutral-dark);padding:2rem;margin:0}
+    .container{max-width:1000px;margin:0 auto}
+    header{display:flex;gap:1rem;align-items:center;margin-bottom:1.5rem}
+    .brand{display:flex;align-items:center;gap:.75rem}
+    .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--primary-red),var(--warm-orange));display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:1.5rem}
+    h1{color:var(--primary-red);margin:0}
+    p.lead{color:#666}
+    .grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1rem}
+    .card{background:var(--card-bg);padding:1.5rem;border-radius:12px;box-shadow:0 8px 26px rgba(0,0,0,0.06)}
+    h2{color:var(--primary-red);font-size:1.1rem;margin-top:0}
+    code{background:#f6f6f6;padding:.15rem .4rem;border-radius:4px;font-size:.9rem}
+    pre{background:#f6f6f6;padding:1rem;border-radius:6px;overflow:auto;font-size:.85rem}
+    .demo{border:1px dashed #eee;padding:0.75rem;border-radius:8px;margin-top:.5rem;background:#fafafa}
+    .note{font-size:.95rem;color:#666;margin-top:.5rem;font-style:italic}
+    footer{margin-top:2rem;padding-top:1rem;border-top:2px solid #eee;color:#666;font-size:.95rem;text-align:center}
+    button{background:var(--primary-red);color:white;padding:.6rem 1.2rem;border:none;border-radius:6px;cursor:pointer;font-weight:600;transition:all .3s}
+    button:hover{background:#B81E28;transform:translateY(-2px)}
+    
+    /* Estilos para demos internas */
+    .internal-demo{background:#FFF3E0;padding:.75rem;border-radius:6px;border-left:4px solid var(--warm-orange)}
+    .import-demo{background:#E8F5E9;padding:.75rem;border-radius:6px;border-left:4px solid #2d8f2d}
+    .preload-demo{background:#E3F2FD;padding:.75rem;border-radius:6px;border-left:4px solid #1976D2}
+    
+    @media(min-width:800px){ .grid{grid-template-columns:1fr 1fr} }
+
+    /* @import demo */
+    @import url('data:text/css;base64,LmltcG9ydC1kZW1vIHsgZm9udC13ZWlnaHQ6IDYwMDsgfQ==');
+  </style>
+  <!-- Enlazamos la hoja externa para que el ejemplo 'External' haga una petición real al servidor -->
+  <link rel="stylesheet" href="css/external.css">
+  <!-- Preload demo: precarga la hoja y luego la aplica -->
+  <link rel="preload" as="style" href="css/preloaded.css" onload="this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/preloaded.css"></noscript>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">CSS</div>
+        <div>
+          <h1>Estilos: cómo cargarlos</h1>
+          <p class="note">Ejemplos: <strong>Inline</strong>, <strong>Internal</strong>, <strong>External</strong>, <strong>@import</strong>, <strong>Preload</strong>, <strong>Dinámico (JS)</strong> y <strong>CSSOM</strong>.</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- 1) Inline -->
+      <section class="card">
+        <h2>1) Inline (atributo <code>style</code>)</h2>
+        <p>El estilo se aplica directamente en el elemento con el atributo <code>style="..."</code>. Es específico, de mayor prioridad, y útil para cambios puntuales o generados desde JS.</p>
+        <div class="demo">
+          <div style="background:var(--accent-yellow);padding:.75rem;border-radius:6px">Esto está estilizado con <code>style="..."</code></div>
+        </div>
+      </section>
+
+      <!-- 2) Internal -->
+      <section class="card">
+        <h2>2) Internal (etiqueta <code>&lt;style&gt;</code> en el documento)</h2>
+        <p>Se definen reglas CSS dentro del documento HTML. Útil para estilos específicos de una página o demos educativas.</p>
+        <div class="demo">
+          <div class="internal-demo">Estilo definido dentro de <code>&lt;style&gt;</code> en el HTML</div>
+        </div>
+      </section>
+
+      <!-- 3) External -->
+      <section class="card">
+        <h2>3) External (archivo .css y etiqueta <code>&lt;link rel="stylesheet"&gt;</code>)</h2>
+        <p>La forma más común: separa estructura (HTML) y presentación (CSS). El archivo se carga mediante una petición HTTP al servidor.</p>
+        <div class="demo">
+          <div style="background:#FFEBEE;padding:.75rem;border-radius:6px;border-left:4px solid var(--primary-red)">
+            Este bloque simula estilos externos (en producción vendría de <code>css/external.css</code>)
+          </div>
+        </div>
+        <div class="note">Abre DevTools → Network para ver la petición al archivo <code>css/external.css</code>.</div>
+      </section>
+
+      <!-- 4) @import -->
+      <section class="card">
+        <h2>4) <code>@import</code> dentro de un archivo CSS</h2>
+        <p>Permite importar otras hojas desde CSS. Ten en cuenta que puede afectar al rendimiento si se usa en cascada por petición adicional.</p>
+        <div class="demo">
+          <div class="import-demo">Estilos traídos por <code>@import</code> (definido en el <code>&lt;style&gt;</code> interno)</div>
+        </div>
+      </section>
+
+      <!-- 5) Preload -->
+      <section class="card">
+        <h2>5) Preload (cargar con prioridad)</h2>
+        <p>Usa <code>&lt;link rel="preload" as="style" href="..." onload="this.rel='stylesheet'"&gt;</code> para descargar CSS con prioridad y luego aplicarlo como hoja.</p>
+        <div class="demo">
+          <div class="preload-demo">La hoja CSS puede ser precargada y aplicada dinámicamente</div>
+        </div>
+      </section>
+
+      <!-- 6) Dinámico con JS -->
+      <section class="card">
+        <h2>6) Dinámico con JavaScript</h2>
+        <p>Puedes crear y añadir <code>&lt;link&gt;</code> o <code>&lt;style&gt;</code> desde JS para cargar estilos a demanda (lazy, user theme, A/B tests, etc.).</p>
+        <div class="demo">
+          <div id="dynTarget" style="padding:.75rem;border-radius:6px;background:#f0f0f0">Pulsa el botón para añadir un estilo dinámico</div>
+          <div style="margin-top:.6rem"><button id="loadCssBtn">Cargar CSS dinámico</button></div>
+        </div>
+      </section>
+
+      <!-- 7) CSSOM -->
+      <section class="card">
+        <h2>7) CSSOM (insertRule from JS)</h2>
+        <p>Manipulación directa de las reglas CSS a través de la API del navegador (<code>document.styleSheets</code>). Útil para herramientas o estilos generados.</p>
+        <div class="demo">
+          <div id="omTarget" style="padding:.75rem;border-radius:6px;background:#f0f0f0">Esto puede recibir una regla por CSSOM</div>
+          <div style="margin-top:.6rem"><button id="insertRuleBtn">Insertar regla CSSOM</button></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="card" style="margin-top:1rem">
+      <h2>Cómo servirlo con Node <code>http-server</code></h2>
+      <p class="note">Instala <code>http-server</code> con <code>npm i -g http-server</code>, luego ejecuta:</p>
+      <pre>cd Taller04-EstilizacionCSS
+http-server -p 8002
+# abre http://localhost:8002</pre>
+      <p class="note">Al servir con http-server verás las peticiones HTTP para las hojas externas; esto es importante para entender cómo se cargan los recursos.</p>
+    </div>
+
+    <footer>
+      <p>Ejemplos educativos de diferentes formas de cargar CSS en una página web.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Script para demo dinámica (botón 6)
+    document.getElementById('loadCssBtn').addEventListener('click', function(){
+      const style = document.createElement('style');
+      style.textContent = '#dynTarget { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-weight: bold; }';
+      document.head.appendChild(style);
+      this.disabled = true;
+      this.textContent = '✓ CSS cargado';
+    });
+
+    // Script para demo CSSOM (botón 7)
+    document.getElementById('insertRuleBtn').addEventListener('click', function(){
+      const sheet = document.styleSheets[0];
+      const rule = '#omTarget { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; font-weight: bold; padding: 1rem !important; }';
+      sheet.insertRule(rule, sheet.cssRules.length);
+      this.disabled = true;
+      this.textContent = '✓ Regla insertada';
+    });
+  </script>
+</body>
+</html>

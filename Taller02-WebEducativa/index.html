@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprende HTML y CSS - Tu Portal Educativo</title>
+    <style>
+        :root {
+            --primary-red: #D72631; /* color principal (logo) */
+            --accent-yellow: #FFC300; /* acento brillante */
+            --warm-orange: #FF9F1C; /* tono cálido para gradientes */
+            --neutral-dark: #1B1B1B; /* texto oscuro */
+            --muted-bg: #FFF9F2; /* fondo cálido y suave */
+            --card-bg: #FFFFFF;
+            --muted-gray: #707070;
+        }
+
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--neutral-dark);
+            background: var(--muted-bg);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--warm-orange) 100%);
+            color: white;
+            padding: 0.75rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.25rem;
+        }
+
+        .site-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .site-logo {
+            width: 56px;
+            height: 56px;
+            object-fit: contain;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.06);
+            padding: 4px;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.25rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.2s ease, transform 0.15s ease;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            position: relative;
+            background: linear-gradient(135deg, var(--primary-red) 0%, var(--accent-yellow) 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 1.25rem;
+        }
+
+        .hero::before {
+            /* Overlay para mejorar contraste con la parte amarilla del gradiente */
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.06));
+            border-radius: 0;
+        }
+
+        .hero > * { position: relative; z-index: 1; }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 1.25rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            background: var(--accent-yellow);
+            color: var(--neutral-dark);
+            padding: 0.9rem 1.6rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            display: inline-block;
+            box-shadow: 0 6px 14px rgba(215, 38, 49, 0.12);
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(215, 38, 49, 0.18);
+        }
+
+        .cta-button:focus-visible {
+            outline: 3px solid rgba(215, 38, 49, 0.22);
+            outline-offset: 3px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.25rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.9rem;
+            margin-bottom: 2.25rem;
+            color: var(--primary-red);
+        }
+
+        .courses {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .course-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 6px 18px rgba(22,22,22,0.06);
+            transition: transform 0.22s ease, box-shadow 0.22s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(22,22,22,0.08);
+        }
+
+        .course-card h3 {
+            color: var(--primary-red);
+            margin-bottom: 0.75rem;
+        }
+
+        .course-card p {
+            color: var(--muted-gray);
+            margin-bottom: 0.85rem;
+        }
+
+        .course-card ul {
+            list-style: none;
+            padding-left: 1rem;
+        }
+
+        .course-card li:before {
+            content: "✓ ";
+            color: var(--primary-red);
+            font-weight: 700;
+        }
+
+        .features {
+            background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.8));
+            padding: 3rem 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .feature-item {
+            padding: 1.5rem;
+        }
+
+        .feature-icon {
+            font-size: 2.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--warm-orange);
+        }
+
+        footer {
+            background: var(--neutral-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 2.5rem;
+        }
+
+        .social-links {
+            margin-top: 0.85rem;
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 0.5rem;
+            text-decoration: none;
+        }
+
+        /* Enlaces y navegación accesible */
+        nav a:focus-visible, .social-links a:focus-visible {
+            outline: 3px solid rgba(0,0,0,0.12);
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.6rem; }
+            .hero { padding: 2.5rem 1rem; }
+            nav { padding: 0 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="site-brand">
+                <img src="assets/logo.png" alt="Logo" class="site-logo" onerror="this.style.display='none'">
+                <div class="logo">HTML & CSS Academy</div>
+            </div>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#cursos">Cursos</a></li>
+                <li><a href="#recursos">Recursos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Aprende HTML y CSS desde Cero</h1>
+        <p>Domina los fundamentos del desarrollo web con nuestros cursos prácticos y fáciles de seguir</p>
+        <a href="#cursos" class="cta-button">Comenzar Ahora</a>
+    </section>
+
+    <main>
+        <section class="container" id="cursos">
+            <h2 class="section-title">Nuestros Cursos</h2>
+            <div class="courses">
+                <div class="course-card">
+                    <h3>HTML Básico</h3>
+                    <p>Aprende la estructura fundamental de las páginas web</p>
+                    <ul>
+                        <li>Etiquetas y elementos</li>
+                        <li>Estructura de documentos</li>
+                        <li>Formularios y tablas</li>
+                        <li>Semántica HTML5</li>
+                    </ul>
+                </div>
+
+                <div class="course-card">
+                    <h3>CSS Esencial</h3>
+                    <p>Dale estilo y vida a tus páginas web</p>
+                    <ul>
+                        <li>Selectores y propiedades</li>
+                        <li>Box model y layouts</li>
+                        <li>Flexbox y Grid</li>
+                        <li>Responsive design</li>
+                    </ul>
+                </div>
+
+                <div class="course-card">
+                    <h3>Proyectos Prácticos</h3>
+                    <p>Construye sitios web reales desde cero</p>
+                    <ul>
+                        <li>Portfolio personal</li>
+                        <li>Landing pages</li>
+                        <li>Blog responsivo</li>
+                        <li>Sitio corporativo</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">¿Por qué elegirnos?</h2>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">📚</div>
+                        <h3>Contenido Actualizado</h3>
+                        <p>Material siempre al día con las últimas tecnologías</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">💻</div>
+                        <h3>Ejercicios Prácticos</h3>
+                        <p>Aprende haciendo con proyectos reales</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">👥</div>
+                        <h3>Comunidad Activa</h3>
+                        <p>Conéctate con otros estudiantes</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🎯</div>
+                        <h3>A Tu Ritmo</h3>
+                        <p>Estudia cuando y donde quieras</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container" id="recursos">
+            <h2 class="section-title">Recursos Gratuitos</h2>
+            <div class="courses">
+                <div class="course-card">
+                    <h3>📖 Guías de Referencia</h3>
+                    <p>Documentación completa de HTML y CSS para consulta rápida</p>
+                </div>
+                <div class="course-card">
+                    <h3>🎨 Galería de Ejemplos</h3>
+                    <p>Inspírate con diseños y componentes listos para usar</p>
+                </div>
+                <div class="course-card">
+                    <h3>🔧 Herramientas</h3>
+                    <p>Editores, validadores y recursos útiles para desarrolladores</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contacto">
+        <p>&copy; 2024 HTML & CSS Academy. Todos los derechos reservados.</p>
+        <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">YouTube</a>
+            <a href="#">GitHub</a>
+        </div>
+    </footer>
+</body>
+</html>

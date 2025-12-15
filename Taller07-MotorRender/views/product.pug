@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  .product-detail
+    img(src=product.img alt=product.name)
+    h2= product.name
+    p.desc= product.desc
+    p.price= product.price
+    a(href="/") ← Volver al inicio

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SPA Tareas</title>
+  <style>
+    :root{
+      --primary-red: #D72631;
+      --accent-yellow: #FFC300;
+      --warm-orange: #FF9F1C;
+      --neutral-dark: #1B1B1B;
+      --muted-bg: #FFF9F2;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+      background:linear-gradient(135deg, #FFF9F2 0%, #FFE5D9 100%);
+      color:var(--neutral-dark);
+      min-height:100vh;
+      padding:2rem 1rem;
+    }
+    .container{max-width:800px;margin:0 auto}
+    header{
+      background:white;
+      padding:1.5rem;
+      border-radius:16px;
+      box-shadow:0 8px 32px rgba(215, 38, 49, 0.1);
+      margin-bottom:2rem;
+    }
+    h1{
+      color:var(--primary-red);
+      font-size:2rem;
+      margin-bottom:0.5rem;
+      font-weight:700;
+    }
+    .subtitle{
+      color:#666;
+      font-size:0.95rem;
+    }
+    nav{
+      display:flex;
+      gap:1rem;
+      margin-top:1.5rem;
+      border-top:2px solid #f0f0f0;
+      padding-top:1rem;
+    }
+    nav a{
+      text-decoration:none;
+      color:var(--neutral-dark);
+      padding:0.6rem 1.5rem;
+      border-radius:8px;
+      transition:all 0.3s ease;
+      font-weight:500;
+    }
+    nav a:hover{
+      background:rgba(215, 38, 49, 0.1);
+      color:var(--primary-red);
+    }
+    nav a.active{
+      background:var(--primary-red);
+      color:white;
+      font-weight:600;
+    }
+    .card{
+      background:white;
+      padding:2rem;
+      border-radius:16px;
+      box-shadow:0 8px 32px rgba(0,0,0,0.08);
+    }
+    form{
+      display:flex;
+      gap:0.75rem;
+      flex-wrap:wrap;
+      margin-bottom:1.5rem;
+    }
+    input[type=text]{
+      flex:1;
+      min-width:200px;
+      padding:0.85rem 1rem;
+      border:2px solid #e5e5e5;
+      border-radius:10px;
+      font-size:1rem;
+      transition:border 0.3s ease;
+    }
+    input[type=text]:focus{
+      outline:none;
+      border-color:var(--primary-red);
+    }
+    select{
+      padding:0.85rem 1rem;
+      border-radius:10px;
+      border:2px solid #e5e5e5;
+      font-size:1rem;
+      cursor:pointer;
+      background:white;
+    }
+    button{
+      background:var(--primary-red);
+      color:white;
+      padding:0.85rem 1.5rem;
+      border:none;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:600;
+      font-size:1rem;
+      transition:all 0.3s ease;
+    }
+    button:hover{
+      background:#B81E28;
+      transform:translateY(-2px);
+      box-shadow:0 4px 12px rgba(215, 38, 49, 0.3);
+    }
+    button.secondary{
+      background:var(--warm-orange);
+    }
+    button.secondary:hover{
+      background:#E68A00;
+    }
+    .filters{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:1.5rem;
+      padding-bottom:1rem;
+      border-bottom:2px solid #f0f0f0;
+    }
+    .task{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+      padding:1.25rem;
+      margin-bottom:0.75rem;
+      background:#FAFAFA;
+      border-radius:12px;
+      border-left:4px solid transparent;
+      transition:all 0.3s ease;
+    }
+    .task:hover{
+      background:#F5F5F5;
+      transform:translateX(4px);
+    }
+    .task.low{border-left-color:#2d8f2d}
+    .task.medium{border-left-color:var(--warm-orange)}
+    .task.high{border-left-color:var(--primary-red)}
+    .task-content{flex:1}
+    .title{
+      font-size:1.1rem;
+      font-weight:600;
+      color:var(--neutral-dark);
+      margin-bottom:0.25rem;
+    }
+    .title.done{
+      text-decoration:line-through;
+      color:#999;
+    }
+    .meta{
+      font-size:0.85rem;
+      color:#888;
+    }
+    .task-actions{
+      display:flex;
+      gap:0.5rem;
+      align-items:center;
+    }
+    .importance{
+      padding:0.35rem 0.75rem;
+      border-radius:6px;
+      font-size:0.85rem;
+      font-weight:600;
+      text-transform:uppercase;
+    }
+    .importance.low{
+      background:#E8F5E9;
+      color:#2d8f2d;
+    }
+    .importance.medium{
+      background:#FFF3E0;
+      color:var(--warm-orange);
+    }
+    .importance.high{
+      background:#FFEBEE;
+      color:var(--primary-red);
+    }
+    .task-actions button{
+      padding:0.5rem 1rem;
+      font-size:0.9rem;
+    }
+    .empty{
+      text-align:center;
+      padding:3rem 1rem;
+      color:#999;
+      font-size:1.1rem;
+    }
+    .empty::before{
+      content:'📝';
+      display:block;
+      font-size:3rem;
+      margin-bottom:1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>✨ Gestor de Tareas</h1>
+      <div class="subtitle">Organiza tus tareas de forma simple y eficiente</div>
+      <nav>
+        <a href="#/" data-route>📋 Lista</a>
+        <a href="#/add" data-route>➕ Añadir</a>
+      </nav>
+    </header>
+
+    <main class="card">
+      <div id="app"></div>
+    </main>
+  </div>
+
+  <script>
+    let tasks = [];
+
+    const html = (strings, ...vals) => strings.reduce((s, str, i) => s + str + (vals[i]||''), '');
+
+    function TaskForm({onAdd}){
+      const form = document.createElement('form');
+      form.innerHTML = `
+        <input type="text" placeholder="¿Qué necesitas hacer?" required/>
+        <select>
+          <option value="low">Baja</option>
+          <option value="medium">Media</option>
+          <option value="high">Alta</option>
+        </select>
+        <button type="submit">Agregar Tarea</button>
+      `;
+      form.addEventListener('submit', e=>{
+        e.preventDefault();
+        const input = form.querySelector('input');
+        const select = form.querySelector('select');
+        onAdd({title:input.value.trim(), importance:select.value});
+        input.value='';
+      });
+      return form;
+    }
+
+    function TaskItem(task, idx, {onToggle, onDelete}){
+      const el = document.createElement('div');
+      el.className = `task ${task.importance}`;
+      
+      const content = document.createElement('div');
+      content.className = 'task-content';
+      content.innerHTML = `
+        <div class="title ${task.done ? 'done' : ''}">${escape(task.title)}</div>
+        <div class="meta">${new Date(task.created).toLocaleString('es-ES', {dateStyle: 'short', timeStyle: 'short'})}</div>
+      `;
+      
+      const actions = document.createElement('div');
+      actions.className = 'task-actions';
+      
+      const badge = document.createElement('span');
+      badge.className = `importance ${task.importance}`;
+      const labels = {low: 'Baja', medium: 'Media', high: 'Alta'};
+      badge.textContent = labels[task.importance];
+      
+      const toggleBtn = document.createElement('button');
+      toggleBtn.textContent = task.done ? '↩️ Deshacer' : '✓ Hecho';
+      toggleBtn.onclick = () => onToggle(idx);
+      
+      const delBtn = document.createElement('button');
+      delBtn.className = 'secondary';
+      delBtn.textContent = '🗑️ Eliminar';
+      delBtn.onclick = () => onDelete(idx);
+      
+      actions.appendChild(badge);
+      actions.appendChild(toggleBtn);
+      actions.appendChild(delBtn);
+      
+      el.appendChild(content);
+      el.appendChild(actions);
+      
+      return el;
+    }
+
+    function TaskList({tasks, onToggle, onDelete}){
+      const wrap = document.createElement('div');
+      if(!tasks.length){
+        wrap.innerHTML = '<div class="empty">No hay tareas pendientes<br><small>¡Comienza añadiendo una nueva tarea!</small></div>';
+        return wrap;
+      }
+      tasks.forEach((t,i) => wrap.appendChild(TaskItem(t, i, {onToggle, onDelete})));
+      return wrap;
+    }
+
+    function route(){
+      const hash = location.hash.replace('#','') || '/';
+      const app = document.getElementById('app');
+      app.innerHTML = '';
+      
+      if(hash === '/'){
+        const controls = document.createElement('div');
+        controls.className = 'filters';
+        
+        const info = document.createElement('div');
+        info.innerHTML = `<strong>${tasks.length}</strong> tareas en total`;
+        
+        const clearBtn = document.createElement('button');
+        clearBtn.className = 'secondary';
+        clearBtn.textContent = '🗑️ Borrar todo';
+        clearBtn.onclick = () => {
+          if(confirm('¿Borrar todas las tareas?')){
+            tasks = [];
+            renderRoute();
+          }
+        };
+        
+        controls.appendChild(info);
+        controls.appendChild(clearBtn);
+        app.appendChild(controls);
+
+        const list = TaskList({
+          tasks,
+          onToggle(i){
+            tasks[i].done = !tasks[i].done;
+            renderRoute();
+          },
+          onDelete(i){
+            tasks.splice(i, 1);
+            renderRoute();
+          }
+        });
+        app.appendChild(list);
+      } else if(hash.startsWith('/add')){
+        const form = TaskForm({
+          onAdd: ({title, importance}) => {
+            tasks.unshift({
+              title,
+              importance,
+              created: Date.now(),
+              done: false
+            });
+            location.hash = '/';
+          }
+        });
+        app.appendChild(form);
+      } else {
+        app.innerHTML = '<div class="empty">Ruta no encontrada</div>';
+      }
+      
+      document.querySelectorAll('nav a[data-route]').forEach(a =>
+        a.classList.toggle('active', a.getAttribute('href') === '#' + hash)
+      );
+    }
+
+    function renderRoute(){ route(); }
+
+    function escape(s){
+      return String(s).replace(/[&<>"]/g, c => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;'
+      }[c] || c));
+    }
+
+    window.addEventListener('hashchange', route);
+    window.addEventListener('DOMContentLoaded', route);
+  </script>
+</body>
+</html>

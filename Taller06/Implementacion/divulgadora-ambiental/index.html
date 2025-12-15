@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Divulgación Ambiental — María Verde</title>
+  <meta name="description" content="Página accesible sobre María Verde, divulgadora de conciencia ambiental. Ejemplo de buenas prácticas WCAG y WAI-ARIA.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <header class="site-header" role="banner">
+    <div class="container">
+      <div class="brand">
+        <h1 class="site-title">María Verde</h1>
+        <p class="site-tag">Divulgadora de conciencia ambiental</p>
+      </div>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="#about">Sobre</a></li>
+          <li><a href="#projects">Proyectos</a></li>
+          <li><a href="#act">Actúa</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section id="hero" class="hero" role="region" aria-labelledby="hero-title">
+      <div class="container hero-inner">
+        <figure class="profile" role="group" aria-labelledby="profile-name">
+          <img src="https://picsum.photos/seed/div1/600/600" alt="Retrato de María Verde" width="320" height="320">
+          <figcaption>
+            <h2 id="profile-name">María Verde</h2>
+            <p class="subtitle">Divulgadora, conferencista y activista medioambiental</p>
+          </figcaption>
+        </figure>
+        <div class="hero-text">
+          <h3 id="hero-title">Conciencia y acción para un planeta sostenible</h3>
+          <p>Mi misión es acercar prácticas sostenibles a la vida diaria a través de talleres, charlas y recursos abiertos. Aquí encontrarás proyectos, guías y formas sencillas de involucrarte.</p>
+          <div class="cta-row">
+            <button id="openSubscribe" class="btn primary" aria-controls="subscribeDialog" aria-haspopup="dialog">Suscribirme</button>
+            <a href="#projects" class="btn secondary">Ver proyectos</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="container" role="region" aria-labelledby="about-title">
+      <h2 id="about-title">Sobre María</h2>
+      <p>María es ingeniera ambiental y comunicadora. Sus charlas combinan ciencia, educación y herramientas prácticas para reducir la huella ecológica.</p>
+    </section>
+
+    <section id="projects" class="container" role="region" aria-labelledby="projects-title">
+      <h2 id="projects-title">Proyectos destacados</h2>
+      <ul class="projects-list">
+        <li>
+          <article aria-labelledby="p1-title">
+            <h3 id="p1-title">Huertos Urbanos</h3>
+            <p>Guías para iniciar huertos en balcones y espacios comunitarios.</p>
+          </article>
+        </li>
+        <li>
+          <article aria-labelledby="p2-title">
+            <h3 id="p2-title">Consumo Responsable</h3>
+            <p>Recursos y retos para reducir desperdicio y consumo impulsivo.</p>
+          </article>
+        </li>
+      </ul>
+    </section>
+
+    <section id="act" class="container" role="region" aria-labelledby="act-title">
+      <h2 id="act-title">Actúa</h2>
+      <p>Suscríbete al boletín para recibir recursos y fechas de talleres.</p>
+      <form id="subscribeForm" class="form" aria-describedby="form-desc">
+        <p id="form-desc">Recibirás un correo periódico con materiales y eventos. Puedes darte de baja en cualquier momento.</p>
+        <label for="name">Nombre</label>
+        <input id="name" name="name" required aria-required="true">
+
+        <label for="email">Correo electrónico</label>
+        <input id="email" name="email" type="email" required aria-required="true">
+
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Enviar</button>
+          <button type="reset" class="btn tertiary">Limpiar</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>Contacta: <a href="mailto:maría@ejemplo.org">maría@ejemplo.org</a></p>
+      <p>Recursos: <a href="https://www.w3.org/WAI/" target="_blank" rel="noopener">WAI</a> · <a href="https://www.w3.org/standards/" target="_blank" rel="noopener">W3C</a></p>
+    </div>
+  </footer>
+
+  <!-- Accessible subscribe dialog -->
+  <div id="subscribeDialog" class="dialog" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="dialogTitle">
+    <div class="dialog-inner">
+      <h2 id="dialogTitle">Suscríbete al boletín</h2>
+      <p>Completa tu correo para recibir noticias y recursos.</p>
+      <form id="dialogForm">
+        <label for="dialogEmail">Correo</label>
+        <input id="dialogEmail" name="dialogEmail" type="email" required aria-required="true">
+        <div class="dialog-actions">
+          <button type="submit" class="btn primary">Suscribir</button>
+          <button type="button" id="closeDialog" class="btn tertiary">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Live region for announcements -->
+  <div id="liveStatus" class="sr-only" role="status" aria-live="polite"></div>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

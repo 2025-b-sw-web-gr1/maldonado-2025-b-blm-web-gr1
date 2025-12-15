@@ -1,0 +1,36 @@
+:root{--brand:#2E8B57;--accent:#7ED957;--bg:#ffffff;--text:#0b2b1d}
+*{box-sizing:border-box}
+body{font-family:Segoe UI,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);margin:0}
+.container{max-width:900px;margin:0 auto;padding:1rem}
+.skip-link{position:absolute;left:1rem;top:1rem;background:#000;color:#fff;padding:.4rem .6rem;border-radius:4px;transform:translateY(-120%);transition:transform .2s}
+.skip-link:focus{transform:translateY(0)}
+.site-header{padding:1rem 0;border-bottom:1px solid #eee}
+.brand{display:flex;flex-direction:column}
+.site-title{margin:0;color:var(--brand)}
+.site-tag{margin:0;color:#4f7a62}
+.main-nav ul{list-style:none;display:flex;gap:1rem;padding-left:0}
+.main-nav a{color:var(--brand)}
+.hero{background:linear-gradient(135deg,#eafbea,#e0f7df);padding:1rem}
+.hero-inner{display:grid;grid-template-columns:320px 1fr;gap:1rem;align-items:center}
+.profile img{width:100%;height:auto;border-radius:8px}
+.cta-row{display:flex;gap:.75rem;margin-top:.6rem}
+.btn{padding:.6rem 1rem;border-radius:8px;border:0;cursor:pointer}
+.btn.primary{background:var(--brand);color:#fff}
+.btn.secondary{background:#fff;color:var(--brand);border:1px solid rgba(0,0,0,.06)}
+.btn.tertiary{background:transparent;border:1px solid #ddd;color:var(--text)}
+.projects-list{list-style:none;padding:0;display:grid;grid-template-columns:1fr;gap:.6rem}
+.form{max-width:520px}
+label{display:block;margin-top:.6rem}
+input{width:100%;padding:.5rem;border-radius:6px;border:1px solid #ddd}
+.form-actions{display:flex;gap:.6rem;margin-top:.6rem}
+.site-footer{padding:1rem;border-top:1px solid #eee;margin-top:1rem}
+.dialog{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45);visibility:hidden;opacity:0;transition:opacity .2s}
+.dialog[aria-hidden="false"]{visibility:visible;opacity:1}
+.dialog-inner{background:#fff;padding:1rem;border-radius:8px;max-width:420px;width:100%}
+.dialog-actions{display:flex;gap:.6rem;margin-top:.6rem}
+.sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
+
+/* Focus styles */
+:focus{outline:3px solid rgba(46,139,87,.18);outline-offset:3px}
+
+@media(max-width:700px){.hero-inner{grid-template-columns:1fr}.profile img{max-width:240px;margin:0 auto}.cta-row{justify-content:flex-start}}
