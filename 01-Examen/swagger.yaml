@@ -1,0 +1,468 @@
+openapi: 3.0.1
+info:
+  title: JSONPlaceholder — Especificación consolidada
+  version: 1.0.0
+  description: Especificación OpenAPI 3.0 que documenta los endpoints usados en los talleres 08-09 (posts, comments, albums, photos, todos, users).
+  contact:
+    name: Leonardo Maldonado
+    email: leonardo.maldonado@example.com
+servers:
+  - url: https://jsonplaceholder.typicode.com
+paths:
+  /posts:
+    get:
+      summary: Obtener todos los posts
+      responses:
+        '200':
+          description: Lista de posts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+    post:
+      summary: Crear un post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostCreate'
+            examples:
+              newPost:
+                summary: Ejemplo de creación de post
+                value:
+                  title: "Nueva encimera Atelier"
+                  body: "Encimera de cuarzo con acabado anti-manchas"
+                  userId: 10
+      responses:
+        '201':
+          description: Post creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+              examples:
+                createdPost:
+                  summary: Respuesta simulada con id
+                  value:
+                    id: 101
+                    title: "Nueva encimera Atelier"
+                    body: "Encimera de cuarzo con acabado anti-manchas"
+                    userId: 10
+  /posts/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Obtener post por id
+      responses:
+        '200':
+          description: Post encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+              examples:
+                samplePost:
+                  summary: Ejemplo de post con id=1
+                  value:
+                    userId: 1
+                    id: 1
+                    title: "sunt aut facere repellat provident occaecati excepturi optio reprehenderit"
+                    body: "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+        '404':
+          description: No encontrado
+    put:
+      summary: Reemplazar un post (PUT)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Post'
+      responses:
+        '200':
+          description: Post reemplazado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+    patch:
+      summary: Actualizar parcialmente un post (PATCH)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                body:
+                  type: string
+            examples:
+              patchTitle:
+                summary: Ejemplo de PATCH para cambiar el título
+                value:
+                  title: "Título actualizado con PATCH"
+      responses:
+        '200':
+          description: Post actualizado parcialmente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+              examples:
+                patchedPost:
+                  summary: Respuesta simulada tras PATCH
+                  value:
+                    userId: 1
+                    id: 1
+                    title: "Título actualizado con PATCH"
+                    body: "Contenido original"
+    delete:
+      summary: Eliminar un post (DELETE)
+      responses:
+        '200':
+          description: Recurso eliminado
+  /comments:
+    get:
+      summary: Obtener comentarios (opcionalmente filtrar por postId)
+      parameters:
+        - name: postId
+          in: query
+          schema:
+            type: integer
+          description: Filtrar comentarios por postId
+      responses:
+        '200':
+          description: Lista de comentarios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Comment'
+    post:
+      summary: Crear comentario
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentCreate'
+            examples:
+              newComment:
+                summary: Ejemplo de creación de comentario
+                value:
+                  postId: 1
+                  name: "Alumno Test"
+                  email: "alumno@example.com"
+                  body: "Comentario de práctica desde Swagger"
+      responses:
+        '201':
+          description: Comentario creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+              examples:
+                createdComment:
+                  summary: Comentario creado (simulado)
+                  value:
+                    id: 501
+                    postId: 1
+                    name: "Alumno Test"
+                    email: "alumno@example.com"
+                    body: "Comentario de práctica desde Swagger"
+  /albums:
+    get:
+      summary: Obtener álbumes
+      responses:
+        '200':
+          description: Lista de álbumes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Album'
+    post:
+      summary: Crear álbum
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AlbumCreate'
+              examples:
+                newAlbum:
+                  summary: Ejemplo de creación de álbum
+                  value:
+                    title: "Colección Atelier 2025"
+                    userId: 5
+      responses:
+        '201':
+          description: Álbum creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Album'
+                examples:
+                  createdAlbum:
+                    summary: Álbum creado (simulado)
+                    value:
+                      id: 101
+                      title: "Colección Atelier 2025"
+                      userId: 5
+  /albums/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Obtener álbum por id
+      responses:
+        '200':
+          description: Álbum encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Album'
+        '404':
+          description: No encontrado
+  /photos:
+    get:
+      summary: Obtener fotos (opcionalmente filtrar por albumId)
+      parameters:
+        - name: albumId
+          in: query
+          schema:
+            type: integer
+          description: Filtrar fotos por albumId
+      responses:
+        '200':
+          description: Lista de fotos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Photo'
+  /todos:
+    get:
+      summary: Obtener tareas (todos)
+      responses:
+        '200':
+          description: Lista de tareas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Todo'
+    post:
+      summary: Crear tarea
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TodoCreate'
+              examples:
+                newTodo:
+                  summary: Ejemplo de creación de tarea
+                  value:
+                    userId: 7
+                    title: "Revisar muestras de encimeras"
+                    completed: false
+      responses:
+        '201':
+          description: Tarea creada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+                examples:
+                  createdTodo:
+                    summary: Tarea creada (simulada)
+                    value:
+                      id: 201
+                      userId: 7
+                      title: "Revisar muestras de encimeras"
+                      completed: false
+  /todos/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Obtener tarea por id
+      responses:
+        '200':
+          description: Tarea encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+  /users:
+    get:
+      summary: Obtener usuarios
+      responses:
+        '200':
+          description: Lista de usuarios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+  /users/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Obtener usuario por id
+      responses:
+        '200':
+          description: Usuario encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+components:
+  schemas:
+    Post:
+      type: object
+      properties:
+        userId:
+          type: integer
+        id:
+          type: integer
+        title:
+          type: string
+        body:
+          type: string
+      required: [userId, id, title, body]
+    PostCreate:
+      type: object
+      properties:
+        title:
+          type: string
+        body:
+          type: string
+        userId:
+          type: integer
+      required: [title, body, userId]
+    Comment:
+      type: object
+      properties:
+        postId:
+          type: integer
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        body:
+          type: string
+      required: [postId, id, name, email, body]
+    CommentCreate:
+      type: object
+      properties:
+        postId:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        body:
+          type: string
+      required: [postId, name, email, body]
+    Album:
+      type: object
+      properties:
+        userId:
+          type: integer
+        id:
+          type: integer
+        title:
+          type: string
+      required: [userId, id, title]
+    AlbumCreate:
+      type: object
+      properties:
+        title:
+          type: string
+        userId:
+          type: integer
+      required: [title, userId]
+    Photo:
+      type: object
+      properties:
+        albumId:
+          type: integer
+        id:
+          type: integer
+        title:
+          type: string
+        url:
+          type: string
+        thumbnailUrl:
+          type: string
+      required: [albumId, id, title, url, thumbnailUrl]
+    Todo:
+      type: object
+      properties:
+        userId:
+          type: integer
+        id:
+          type: integer
+        title:
+          type: string
+        completed:
+          type: boolean
+      required: [userId, id, title, completed]
+    TodoCreate:
+      type: object
+      properties:
+        userId:
+          type: integer
+        title:
+          type: string
+        completed:
+          type: boolean
+      required: [userId, title]
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+        address:
+          type: object
+        phone:
+          type: string
+        website:
+          type: string
+        company:
+          type: object
+      required: [id, name, username, email]
