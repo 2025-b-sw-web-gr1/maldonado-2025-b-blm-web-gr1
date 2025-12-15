@@ -1,0 +1,11 @@
+POST http://localhost:3001/products
+Content-Type: application/json
+
+{
+  "storeId": 1,
+  "name": "Molino Premium",
+  "price": 89.9
+}
+
+> expect status: 201
+> save response: test-results/create_product.json

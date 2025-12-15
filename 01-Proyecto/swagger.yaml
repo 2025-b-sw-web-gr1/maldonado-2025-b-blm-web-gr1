@@ -1,0 +1,262 @@
+openapi: 3.0.3
+info:
+  title: Tiendas y Productos API
+  version: 1.0.0
+  description: API de ejemplo que modela la relación 1 a muchos entre Tiendas (stores) y Productos (products).
+servers:
+  - url: http://localhost:3001
+paths:
+  /stores:
+    get:
+      summary: Obtener todas las tiendas
+      responses:
+        '200':
+          description: Lista de tiendas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Store'
+    post:
+      summary: Crear una tienda
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreCreate'
+            examples:
+              sampleCreate:
+                value:
+                  name: "Tienda Norte"
+                  address: "Calle Norte 77"
+      responses:
+        '201':
+          description: Tienda creada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+  /stores/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Obtener tienda por id
+      responses:
+        '200':
+          description: Tienda encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+        '404':
+          description: No encontrada
+    put:
+      summary: Reemplazar tienda
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StoreCreate'
+      responses:
+        '200':
+          description: Tienda actualizada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+    patch:
+      summary: Actualizar parcialmente tienda
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                address:
+                  type: string
+      responses:
+        '200':
+          description: Tienda modificada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Store'
+    delete:
+      summary: Eliminar tienda
+      responses:
+        '204':
+          description: Eliminada
+  /products:
+    get:
+      summary: Obtener todos los productos
+      responses:
+        '200':
+          description: Lista de productos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+    post:
+      summary: Crear producto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductCreate'
+            examples:
+              sampleProduct:
+                value:
+                  storeId: 1
+                  name: "Molino Premium"
+                  price: 89.9
+      responses:
+        '201':
+          description: Producto creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+  /products/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Obtener producto por id
+      responses:
+        '200':
+          description: Producto encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '404':
+          description: No encontrado
+    put:
+      summary: Reemplazar producto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductCreate'
+      responses:
+        '200':
+          description: Producto actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+    patch:
+      summary: Actualizar parcialmente producto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                price:
+                  type: number
+                storeId:
+                  type: integer
+      responses:
+        '200':
+          description: Producto modificado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+    delete:
+      summary: Eliminar producto
+      responses:
+        '204':
+          description: Eliminado
+  /stores/{id}/products:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Obtener todos los productos de una tienda
+      responses:
+        '200':
+          description: Lista de productos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        '404':
+          description: Tienda no encontrada
+components:
+  schemas:
+    Store:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        address:
+          type: string
+      required:
+        - id
+        - name
+    StoreCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+      required:
+        - name
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+        storeId:
+          type: integer
+        name:
+          type: string
+        price:
+          type: number
+      required:
+        - id
+        - storeId
+        - name
+    ProductCreate:
+      type: object
+      properties:
+        storeId:
+          type: integer
+        name:
+          type: string
+        price:
+          type: number
+      required:
+        - storeId
+        - name
+        - price

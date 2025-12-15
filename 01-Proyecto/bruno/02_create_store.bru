@@ -1,0 +1,10 @@
+POST http://localhost:3001/stores
+Content-Type: application/json
+
+{
+  "name": "Tienda Norte",
+  "address": "Calle Norte 77"
+}
+
+> expect status: 201
+> save response: test-results/create_store.json
