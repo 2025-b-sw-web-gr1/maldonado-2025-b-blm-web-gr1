@@ -1,0 +1,27 @@
+### Create Team
+POST http://localhost:3000/teams
+Content-Type: application/json
+
+{
+  "name": "Barcelona SC",
+  "country": "Ecuador"
+}
+
+### Get All Teams
+GET http://localhost:3000/teams
+
+### Create Player
+POST http://localhost:3000/players
+Content-Type: application/json
+
+{
+    "name": "Damián Díaz",
+    "position": "Midfielder",
+    "team": { "id": 1 }
+}
+
+### Get All Players
+GET http://localhost:3000/players
+
+### Get Players of Team
+GET http://localhost:3000/teams/1/players
